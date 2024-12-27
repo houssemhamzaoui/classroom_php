@@ -1,0 +1,87 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #eef2f3; /* Light grayish blue */
+    margin: 0;
+    padding: 0;
+    color: #2c3e50; /* Dark blue-gray */
+}
+
+/* Container Styles */
+.container {
+    max-width: 900px;
+    margin: 20px auto;
+    background: #ffffff; /* White */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation Bar */
+.nav_bar {
+    background-color: #1e88e5; /* Bright blue */
+    color: white;
+    padding: 15px;
+    text-align: center;
+    border-radius: 10px 10px 0 0;
+}
+
+.nav_bar h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+/* Courses Section */
+.courses {
+    padding: 20px;
+    text-align: left;
+}
+
+.courses h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    color: #1e88e5; /* Bright blue */
+}
+
+/* Course Links */
+.courses ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.courses li {
+    margin-bottom: 10px;
+}
+
+.courses a {
+    text-decoration: none;
+    color: #1e88e5; /* Bright blue */
+    font-size: 16px;
+    border-bottom: 1px solid transparent;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+
+.courses a:hover {
+    color: #0d47a1; /* Darker blue */
+    border-bottom: 1px solid #0d47a1;
+    font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    .nav_bar h1 {
+        font-size: 20px;
+    }
+
+    .courses h2 {
+        font-size: 18px;
+    }
+
+    .courses a {
+        font-size: 14px;
+    }
+}

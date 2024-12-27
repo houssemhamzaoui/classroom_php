@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style1.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <title>Register</title>
+</head>
+<body>
+    <div class="container">
+        <div class="form-box">
+            <form name="FormFill" method="post" action="handling.php" onsubmit="return validation()">
+                <h2>Register</h2>
+                <p id="result" class="dis">head</p>
+                <div class="input-box">
+                    <i class='bx bxs-user-circle'></i>
+                    <input type="text" name="username" placeholder="Username">
+                </div>
+                <div class="input-box">
+                    <i class='bx bxs-envelope'></i>
+                    <input type="text" name="Email" placeholder="email">
+                </div>
+                <div class="input-box">
+                    <i class='bx bxs-lock-alt' ></i>
+                    <input type="password" name="password" placeholder="password">
+                </div>
+                <div class="input-box">
+                    <select name="Role" class="select-box" required>
+                        <option value="" disabled selected>Select Role</option>
+                        <option value="teacher">Teacher</option>
+                        <option value="student">Student</option>
+                    </select>
+                    <i class='bx bxs-group'></i>
+                </div>                
+                <div class="input-box">
+                    <i class='bx bxs-lock-alt' ></i>
+                    <input type="password" name="Cpassword" placeholder="confirm password">
+                </div>
+                <div class="button">
+                    <input type="submit" class="btn" onclick="validation()" value="register">
+                </div>
+                <div class="group">
+                    <span><a href="">Forgot password</a></span>
+                    <span><a href="">login</a></span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="log.js"></script>
+</body>
+</html>
