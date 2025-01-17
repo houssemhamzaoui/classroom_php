@@ -16,6 +16,15 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'student') {
 if (!isset($courses)) {
     $courses = []; // Default to an empty array if not provided
 }
+if (isset($_POST['sign_out'])) {
+    // Clear session data
+    session_unset();
+    // Destroy the session
+    session_destroy();
+    // Redirect to the login page
+    header("Location: /projet_web/login/login.html");
+    exit();
+}
 ?>
 
 <div class="side_bar">
@@ -35,9 +44,28 @@ if (!isset($courses)) {
     <?php else: ?>
         <p>No courses enrolled.</p>
     <?php endif; ?>
+    <div>
+    <form method="POST" class="zina">
+                <button type="submit" name="sign_out" class="zina_btn">Sign Out</button>
+    </form>
+    </div>
 </div>
+    
 
 <style>
+    .zina_btn{
+        text-decoration : none;
+        border : 2px solid black;
+        color:white;
+        font-size:1em;
+        padding:10px 15px;
+        background-color:red;
+        margin:0;
+    }
+    .zina_btn:hover{
+        background-color:rgb(136, 4, 4);
+
+    }
     .side_bar {
         width: 20%;
         background: #f4f4f4;

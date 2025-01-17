@@ -18,15 +18,19 @@ $teacherId = $_SESSION['user_id'];
 $selectedCourseId = isset($_GET['course_id']) ? $_GET['course_id'] : null;
 
 if ($selectedCourseId) {
-    $sql = "SELECT C.id, C.name, C.code_cours, S.id_student
-            FROM courses C, courses_student S
-            WHERE C.id = S.id_course AND C.id = ? AND C.id_teacher = ?";
+    $sql = "SELECT C.id, C.name AS course_name, C.code_cours, L.username AS student_name, L.email AS student_email
+            FROM courses C
+            JOIN courses_student S ON C.id = S.id_course
+            JOIN login L ON S.id_student = L.id
+            WHERE C.id = ? AND C.id_teacher = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ii", $selectedCourseId, $teacherId);
 } else {
-    $sql = "SELECT C.id, C.name, C.code_cours, S.id_student
-            FROM courses C, courses_student S
-            WHERE C.id = S.id_course AND C.id_teacher = ?";
+    $sql = "SELECT C.id, C.name AS course_name, C.code_cours, L.username AS student_name, L.email AS student_email
+            FROM courses C
+            JOIN courses_student S ON C.id = S.id_course
+            JOIN login L ON S.id_student = L.id
+            WHERE C.id_teacher = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $teacherId);
 }
@@ -40,27 +44,23 @@ if ($result->num_rows > 0): ?>
             <tr>
                 <th>Course Name</th>
                 <th>Course Code</th>
-                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Student Email</th>
                 <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             <?php while ($row = $result->fetch_assoc()): ?>
                 <tr>
-                    <td><?php echo htmlspecialchars($row['name']); ?></td>
+                    <td><?php echo htmlspecialchars($row['course_name']); ?></td>
                     <td><?php echo htmlspecialchars($row['code_cours']); ?></td>
-                    <td><?php echo htmlspecialchars($row['id_student']); ?></td>
+                    <td><?php echo htmlspecialchars($row['student_name']); ?></td>
+                    <td><?php echo htmlspecialchars($row['student_email']); ?></td>
                     <td>
                         <!-- Delete button -->
                         <form action="delete.php" method="POST">
                             <button type="submit" name="action" value="delete_student" class="btn delete-btn">Delete Student</button>
-                            <input type="hidden" name="student_id" value="<?php echo htmlspecialchars($row['id_student']); ?>">
-                            <input type="hidden" name="course_id" value="<?php echo htmlspecialchars($row['id']); ?>">
-                        </form>
-
-                        <!-- View Course button -->
-                        <form action="manage_students.php" method="POST">
-                            <button type="submit" name="action" value="view_course" class="btn view-btn">View Course</button>
+                            <input type="hidden" name="student_id" value="<?php echo htmlspecialchars($row['student_name']); ?>">
                             <input type="hidden" name="course_id" value="<?php echo htmlspecialchars($row['id']); ?>">
                         </form>
                     </td>

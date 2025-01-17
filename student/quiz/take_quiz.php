@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Connexion à la base de données
 $conn = new mysqli('localhost', 'root', 'hosshoss', 'projet');
 
@@ -13,7 +14,7 @@ if (!$quiz) {
 
 // Si le formulaire est soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $student_id = 1; // Remplace par l'authentification réelle de l'étudiant
+    $student_id = $_SESSION['user_id']; // Remplace par l'authentification réelle de l'étudiant
 
     foreach ($_POST['answers'] as $question_id => $choice_id) {
         $stmt = $conn->prepare("INSERT INTO student_answers (quiz_id, student_id, question_id, choice_id) VALUES (?, ?, ?, ?)");

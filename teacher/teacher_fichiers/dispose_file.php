@@ -3,10 +3,6 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-
-var_dump($_SESSION);
-var_dump($_FILES);
-
 // Check if the user is logged in and has the correct role
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'teacher') {
     echo "Unauthorized access. Please log in as a teacher.";
@@ -86,6 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->bind_param("iisss", $teacherId, $courseId, $file_access, $fileType, $description);
         if ($stmt->execute()) {
             echo "File uploaded successfully!";
+            header("Location: ../teacher.php");
         } else {
             echo "Failed to save file details in the database.";
         }
